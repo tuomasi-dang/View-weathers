@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href="../static//images/windows-icon@2x.ico"/>
+
+    <title>气象数据可视化</title>
+
+    <!-- 轮播swiper插件样式 -->
+    <link rel="stylesheet" href="../static/js/swiper/swiper.min.css"/>
+    <!-- 翻牌器 -->
+    <link rel="stylesheet" href="../static/js/cubeflop/cubeflop.css"/>
+
+    <!-- 补间动画包 -->
+    <link rel="stylesheet" href="../static/css/custom-animation.css"/>
+
+    <!-- 重置样式 -->
+    <link rel="stylesheet" href="../static/css/reset.css"/>
+
+    <!-- 当前页面样式文件 -->
+    <link rel="stylesheet" href="../static/css/bigdata.css"/>
+
+    <!-- jquery -->
+    <script src="../static/js/jquery.min.js"></script>
+    <!-- echarts -->
+    <script src="../static/js/echarts/echarts.min.js"></script>
+    <!-- javascript工具库 -->
+    <script src="../static/js/lodash.min.js"></script>
+    <!-- 二维码插件 -->
+    <script src="../static/js/qrcode.min.js"></script>
+    <!-- 轮播插件 -->
+    <script src="../static/js/swiper/swiper.min.js"></script>
+    <!-- 表格滚动插件 -->
+    <script src="../static/js/seamscroll.min.js"></script>
+    <!-- day 日期插件 -->
+    <script src="../static/js/dayjs/dayjs.min.js"></script>
+    <script src="../static/js/dayjs/zh-cn.js"></script>
+    <!-- 工具类 -->
+    <script src="../static/js/utils.js"></script>
+    <!-- 滚动数字所需要的插件 -->
+    <script src="../static/js/jquery.countTo.js"></script>
+    <!-- 翻牌器 -->
+    <script src="../static/js/cubeflop/cubeflop.js"></script>
+
+
+</head>
+
+<body>
+<div class="container">
+    <!-- 组件空气质量统计开始-->
+
+    <div id="kqzlfm-table"></div>
+    <!-- 组件空气质量统计结束-->
+
+    <!-- 组件空气质量标题开始-->
+
+    <div id="kqzlfm-title">
+        <h1>全国空气质量分布</h1>
+    </div>
+
+    <style>
+        #kqzlfm-title {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <!-- 组件空气质量标题结束-->
+
+    <!-- 组件雨天开始-->
+    <div id="xyt-main">
+        <span class="prefix">雨天：</span>
+        <span class="suffix">天</span>
+    </div>
+    <style>
+        #xyt-main {
+            width: 310px;
+            height: 60px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #xyt-main .prefix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(61, 156, 255, 1);
+        }
+
+        #xyt-main .suffix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(221, 221, 221, 1);
+        }
+    </style>
+    <!-- 组件雨天结束-->
+
+    <!-- 组件雾天开始-->
+    <div id="wt-main">
+        <span class="prefix">雾天：</span>
+        <span class="suffix">天</span>
+    </div>
+    <style>
+        #wt-main {
+            width: 310px;
+            height: 60px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #wt-main .prefix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(61, 156, 255, 1);
+        }
+
+        #wt-main .suffix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(221, 221, 221, 1);
+        }
+    </style>
+    <!-- 组件雾天结束-->
+
+    <!-- 组件雪天开始-->
+    <div id="xt-main">
+        <span class="prefix">雪天：</span>
+        <span class="suffix">天</span>
+    </div>
+    <style>
+        #xt-main {
+            width: 310px;
+            height: 60px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #xt-main .prefix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(61, 156, 255, 1);
+        }
+
+        #xt-main .suffix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(221, 221, 221, 1);
+        }
+    </style>
+    <!-- 组件雪天结束-->
+
+    <!-- 组件多云开始-->
+    <div id="dy-main">
+        <span class="prefix">多云：</span>
+        <span class="suffix">天</span>
+    </div>
+    <style>
+        #dy-main {
+            width: 310px;
+            height: 60px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #dy-main .prefix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(61, 156, 255, 1);
+        }
+
+        #dy-main .suffix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(221, 221, 221, 1);
+        }
+    </style>
+    <!-- 组件多云结束-->
+
+    <!-- 组件晴天开始-->
+    <div id="qt-main">
+        <span class="prefix">晴天：</span>
+        <span class="suffix">天</span>
+    </div>
+    <style>
+        #qt-main {
+            width: 310px;
+            height: 60px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #qt-main .prefix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(61, 156, 255, 1);
+        }
+
+        #qt-main .suffix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(221, 221, 221, 1);
+        }
+    </style>
+    <!-- 组件晴天结束-->
+
+    <!-- 组件雾霾开始-->
+    <div id="cm-main">
+        <span class="prefix">雾霾：</span>
+        <span class="suffix">天</span>
+    </div>
+    <style>
+        #cm-main {
+            width: 310px;
+            height: 60px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #cm-main .prefix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(61, 156, 255, 1);
+        }
+
+        #cm-main .suffix {
+            flex: none;
+            display: flex;
+            align-items: flex-end;
+            font-size: 18px;
+            color: rgba(221, 221, 221, 1);
+        }
+    </style>
+
+    <!-- 组件雾霾结束-->
+
+    <!-- 组件全国风力分布标题开始-->
+
+    <div id="qgws-title">
+        <h1>全国风力分布</h1>
+    </div>
+
+    <style>
+        #qgws-title {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <!-- 组件全国风力分布标题结束-->
+
+    <!-- 组件全国风力分布图表开始-->
+    <div id="qgws-table"></div>
+    <!-- 组件全国风力分布图表结束-->
+
+    <!-- 组件全国风向分布标题开始-->
+    <div id="qgfx-title">
+        <h1>全国风向分布</h1>
+    </div>
+    <style>
+        #qgfx-title {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <!-- 组件全国风向分布标题结束-->
+
+    <!-- 组件全国风向分布图表开始-->
+    <div id="qgfx-table"></div>
+    <!-- 组件全国风向分布图表结束-->
+
+
+    <!-- 组件左上时间开始-->
+    <div id="timer-title"></div>
+    <style>
+        #timer-title {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 1);
+
+            line-height: 60px;
+            text-align: center;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+    </style>
+    <!-- 组件左上时间结束-->
+
+    <!-- 组件北京气温变化标题开始-->
+
+    <div id="bgt-title">
+        <h1>广州温度/风速变化情况</h1>
+    </div>
+
+    <style>
+        #bgt-title {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <!-- 组件北京气温变化标题结束-->
+
+    <!-- 组件北京气温变化图表开始-->
+
+    <div id="bgt-table"></div>
+    <!-- 组件北京气温变化图结束-->
+
+    <!-- 组件全国气象实时情况标题开始-->
+
+    <div id="qgsk-title">
+        <h1>全国气象实时情况</h1>
+    </div>
+    <style>
+        #qgsk-title {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <!-- 组件全国气象实时情况标题结束-->
+
+    <!-- 组件全国气象实时情况图表开始-->
+    <div id="qgsk-table" class="scrollTable">
+        <table style="width: 100%; border-collapse: collapse" cellspacing="0" cellpadding="0">
+            <thead style="
+              display: table;
+              width: inherit;
+              table-layout: fixed;
+              box-sizing: border-box;
+            ">
+            <tr class="thead-tr" style="
+                line-height: 40px;
+                color: rgba(255, 255, 255, 1);
+                font-size: 12px;
+                background-color: rgba(71, 16, 122, 0);
+              "></tr>
+            </thead>
+            <tbody class="table-body body-style" style="overflow-y: scroll; display: none"></tbody>
+        </table>
+        <div class="tbody" style="
+            height: 374px;
+            overflow: hidden;
+            display: table;
+            width: inherit;
+            table-layout: fixed;
+            box-sizing: border-box;
+            color: rgba(222, 222, 222, 0.9);
+            line-height: 35px;
+            font-size: 12px;
+            width: 100%;
+          ">
+            <ul id="qgsk-tabletbody"></ul>
+        </div>
+    </div>
+    <style>
+        #qgsk-table {
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        #qgsk-table .has-border {
+            border: 0px solid rgba(79, 141, 170, 1);
+        }
+
+        #qgsk-table .no-border {
+            border: none;
+        }
+
+        #qgsk-table .li {
+            display: table;
+            width: inherit;
+            table-layout: fixed;
+            box-sizing: border-box;
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0px;
+        }
+
+        #qgsk-table .li div {
+            background-color: rgba(9, 15, 45, 0);
+        }
+
+        #qgsk-table .stripe:nth-child(2n) div {
+            background: rgba(27, 61, 97, 0.24);
+        }
+    </style>
+
+    <!-- 组件e88372f0-5e0c-11ec-97ec-f5b047e8bcd7结束-->
+
+    <!-- 组件12cbb000-5e0c-11ec-97ec-f5b047e8bcd7开始-->
+
+    <a href="/admin" target="_blank" style="text-decoration: none">
+        <div id="item12cbb000-5e0c-11ec-97ec-f5b047e8bcd7">
+            <p class="text"></p>
+        </div>
+    </a>
+
+    <script type="text/javascript">
+        $(function () {
+            // 基于准备好的dom，初始化echarts实例
+            // 指定图表的配置项
+            let option = {
+                color: ["#3D9CFF", "#43E8F3"],
+                fontSize: 42,
+                textAlign: "center",
+                gradientDirection: "left",
+                alignItems: "center",
+                justifyContent: "center",
+                lineHeight: 1.2,
+                fontWeight: "normal",
+                textShadow: {
+                    show: true,
+                    x: 0,
+                    y: 0,
+                    value: 14,
+                    color: "rgba(15, 146, 255,1)",
+                },
+            }
+
+            // 指定文字的数据
+            let data = [{data: "气象数据可视化大屏"}]
+
+            //映射
+            data = data.map((item) => {
+                return {data: item["data"]}
+            })
+            $("#item12cbb000-5e0c-11ec-97ec-f5b047e8bcd7 .text").html(
+                data[0].data
+            )
+        })
+    </script>
+
+    <style>
+        #item12cbb000-5e0c-11ec-97ec-f5b047e8bcd7 {
+            line-height: 1.2;
+            font-size: 42px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+        }
+
+        #item12cbb000-5e0c-11ec-97ec-f5b047e8bcd7 .text {
+            background-image: -webkit-linear-gradient(left, #3d9cff, #43e8f3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+
+    <!-- 组件12cbb000-5e0c-11ec-97ec-f5b047e8bcd7结束-->
+
+    <!-- 组件ac8f48e0-5e0d-11ec-97ec-f5b047e8bcd7开始-->
+
+    <div id="itemac8f48e0-5e0d-11ec-97ec-f5b047e8bcd7">
+        <img
+                src="./static/images/256fbb76-dc40-4b28-8507-ff685406735c.png"
+                alt=""
+        />
+    </div>
+    <style>
+        #itemac8f48e0-5e0d-11ec-97ec-f5b047e8bcd7 {
+            width: 1920px;
+            height: 100px;
+        }
+
+        #itemac8f48e0-5e0d-11ec-97ec-f5b047e8bcd7 img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <!-- 组件ac8f48e0-5e0d-11ec-97ec-f5b047e8bcd7结束-->
+</div>
+</body>
+<script>
+    /**
+     *
+     * @param {*} id
+     * @param {*} animations
+     * 声明初始值
+     * 判断动画是否结束
+     */
+
+    function playAnimation(id, animations) {
+        let index = 0
+        let ele = document.querySelector(id)
+        setAnimation(ele, animations[index])
+        ele.addEventListener("webkitAnimationEnd", function () {
+            if (index < animations.length - 1) {
+                index++
+                setAnimation(ele, animations[index])
+            }
+        })
+    }
+
+    /**
+     *
+     * @param {*} element
+     * @param {*} animation
+     * 取index对应的动画
+     * 给元素animation重新赋值
+     */
+
+    function setAnimation(element, animation) {
+        const action = `${animation.duration * 1000}ms ease ${
+            animation.delayed * 1000
+        }ms ${
+            animation.loop ? "infinite" : animation.frequency
+        } normal both running ${animation.type}`
+        element.style.animation = action
+    }
+
+    // 自适应宽度处理
+
+    document.getElementsByClassName("container")[0].style.zoom =
+        document.body.clientWidth / 1920
+
+    // 窗口发生改变自动刷新页面
+    $(window).resize(function () {
+        location.reload()
+    })
+</script>
+<!--页面数据交互-->
+<script src="../static/js/main.js"></script>
+</html>
