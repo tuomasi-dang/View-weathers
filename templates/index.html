@@ -27,9 +27,11 @@
     </div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">管理员</a>
+            <a href="javascript:;">
+                {% if session.get('role') == 0 %}管理员{% else %}普通用户{% endif %}</a>
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
+                <dd><a href="javascript:;">{{ session.get('name', '用户') }}</a></dd>
                 <dd><a href="/logout">退出</a></dd>
             </dl>
         </li>
@@ -121,7 +123,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>   
+            </li>
         </ul>
     </div>
 </div>

@@ -55,6 +55,7 @@ def login():
         if res and res[0][0] > 0:
             session['is_login'] = True
             session['role'] = res[0][1]
+            session['name'] = res[0][2]
             return "200"
         else:
             return "300"
@@ -268,9 +269,12 @@ def get_qgsk_data():
 @app.route('/html/weather')
 def new():
     return render_template('html/weathers.html')
-@app.route('/html/tuijian',methods=["GET"])
+
+
+@app.route('/html/tuijian', methods=["GET"])
 def newTUIJAN():
     return render_template('html/tuijian.html')
+
 
 # 获取天气数据分页
 @app.route('/weather/list', methods=["POST"])

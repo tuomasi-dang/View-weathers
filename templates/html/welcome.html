@@ -15,8 +15,9 @@
 </head>
 <body>
 <div class="x-body layui-anim layui-anim-up">
-    <blockquote class="layui-elem-quote">欢迎管理员：
-        <span class="x-red">admin</span>！当前时间:
+    <blockquote class="layui-elem-quote">欢迎：
+        <span class="x-red"><a href="javascript:;">
+            {{ session.get('name', '用户') }}</a></span>！当前时间:
         <span id="datetime">
 					<script>
 						setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 1000);

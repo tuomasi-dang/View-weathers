@@ -3,8 +3,7 @@ from utils import dbUtil
 
 # 用户登录业务
 def get_user(account, password):
-
-    sql = "select id,type from user where account= '" + account + "' and password= '" + password + "'"
+    sql = "select id,type,name from user where account= '" + account + "' and password= '" + password + "'"
     db = dbUtil()
     res = db.query(sql)
     db.close()
