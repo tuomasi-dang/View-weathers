@@ -52,7 +52,7 @@
         </div>
         <div class="clearfix">
             <label>
-                <input type="checkbox" class="autologin" checked="checked"/>
+                <input type="checkbox" name="agreement" id="agreement" class="autologin" checked="checked"/>
                 注册协议
             </label>
             <a href="/admin" class="forgot_pwd">登录系统</a>
@@ -83,6 +83,7 @@
         let username = $("#username").val();
         let password = $("#password").val();
         let pd = $("#pd").val();
+        let isAgreementChecked = $("#agreement").prop("checked");
 
         if (account == undefined || account == "") {
             return layer.msg("请填写账号");
@@ -98,6 +99,9 @@
         }
         if (pd != password) {
             return layer.msg("两次密码不一致！");
+        }
+        if (!isAgreementChecked) {
+            return layer.msg("请先同意注册协议");
         }
         $.ajax({
             url: "/user/reg",
